@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>沒有使用 worker</title>
+</head>
+
+<body>
+    <input type="text" placeholder="測試輸入欄"><br>
+    <button onclick="start(event)">開始算質數</button>
+    <div id="info"></div>
+    <script>
+        const worker = new Worker('/javascripts/worker-second.js')
+
+        worker.onmessage = event => {
+            //event.data 回傳的資料
+            let { primes, length, howLong } = event.data;
+            info.innerHTML = `${length} 個, ${howLong} 毫秒`;
+        }
+        const start = event => {
+            event.target.style.display = 'none';
+            worker.postMessage('start')
+        };
+    </script>
+</body>
+
+</html>

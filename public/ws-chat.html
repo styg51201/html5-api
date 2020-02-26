@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+    <input type="text" id="user" placeholder="請輸入名字">
+    <button id="connectBtn">連線</button><br>
+    <textarea id="msgArea" cols="50" rows="30" readonly></textarea><br>
+    <input type="text" id="msg"><button id="sendBtn">送出</button>
+
+
+    <script>
+        let socket;
+
+        const myOpen = event => {
+            socket.send(user.value);
+        };
+        const myMsg = event => {
+            msgArea.value += event.data + "\n";
+        };
+
+        const myClose = event => {
+        };
+
+        document.addEventListener('click', event => {
+            switch (event.target.id) {
+                case 'connectBtn':
+                    if (!user.value) {
+                        alert('請填名稱');
+                        return;
+                    }
+                    // if(socket && socket.readyState===WebSocket.OPEN)
+                    //     return;
+
+                    socket = new WebSocket('ws://' + location.host);
+                    //首次連線就送出姓名
+                    socket.addEventListener('open', myOpen);
+                    socket.addEventListener('message', myMsg);
+                    socket.addEventListener('close', myClose);
+                    break;
+                case 'sendBtn':
+                    if (socket && socket.send) {
+                        socket.send(msg.value);
+                        msg.value = '';
+                    }
+                    break;
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

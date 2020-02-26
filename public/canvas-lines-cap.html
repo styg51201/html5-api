@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="form1">
+        <input type="checkbox" name="isClosedPath" id="isClosedPath" onclick="whenChanged()">
+        <label for="isClosedPath">封閉</label> ,
+        <label for="lineCap">線段端點樣式</label>
+        <select name="lineCap" id="lineCap" onchange="whenChanged()">
+            <option value="butt">butt</option>
+            <option value="round">round</option>
+            <option value="square">square</option>
+        </select> ,
+        <label for="lineJoin">端點銜接樣式</label>
+        <select name="lineJoin" id="lineJoin" onchange="whenChanged()">
+            <option value="miter">miter</option>
+            <option value="round">round</option>
+            <option value="bevel">bevel</option>
+        </select>
+    </form>
+    <canvas width="600" height="400" id="myCanvas"></canvas>
+
+    <script>
+        const myCanvas = document.querySelector('#myCanvas');
+        const ctx = myCanvas.getContext('2d');
+
+        function whenChanged() {
+            let isClosedPath = form1.isClosedPath.checked;
+            let lineCap = form1.lineCap.value;
+            let lineJoin = form1.lineJoin.value;
+
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+            ctx.beginPath();
+            ctx.moveTo(50, 50);
+            ctx.lineTo(200, 300);
+            ctx.lineTo(400, 50);
+            isClosedPath ? ctx.closePath() : '';
+
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 40;
+            ctx.lineCap = lineCap;
+            ctx.lineJoin = lineJoin;
+            ctx.stroke();
+
+            // --------------------------
+            ctx.beginPath();
+            ctx.moveTo(50, 50);
+            ctx.lineTo(200, 300);
+            ctx.lineTo(400, 50);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+        }
+        
+        whenChanged();
+
+    </script>
+
+
+
+</body>
+
+</html>

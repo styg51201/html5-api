@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="myCanvas"></canvas>
+
+    <script>
+        const myCanvas = document.querySelector('#myCanvas');
+        const ctx = myCanvas.getContext('2d');
+
+        ctx.beginPath(); //開始
+        ctx.moveTo(50, 50); //移動到點
+        ctx.lineTo(200, 300); //畫線到點
+        ctx.lineTo(400, 50);
+        ctx.strokeStyle = 'red'; //設定樣式
+        ctx.lineWidth = 20;
+        ctx.stroke(); // 套用樣式到路徑上
+
+        ctx.beginPath(); //再重新開始 (重製設定) 上面的就不會再畫一次了
+        ctx.moveTo(50, 50);
+        ctx.lineTo(200, 300);
+        ctx.lineTo(400, 50);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(10, 400);
+        ctx.lineTo(600, 380);
+        ctx.lineTo(580, 0);
+        ctx.lineTo(0, 10);
+        ctx.lineTo(300, 200);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 10;
+        ctx.stroke();
+
+
+    </script>
+
+
+
+</body>
+
+</html>

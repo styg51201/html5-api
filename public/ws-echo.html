@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <button id="connectBtn">connect</button>
+    <button id="disconnectBtn">disconnect</button>
+    <br>
+    <input type="text" id="myInput">
+    <button id="sendBtn">send</button>
+    <div id="info"></div>
+
+
+    <script>
+        let socket;
+
+        const myOpen = event => {
+            info.innerHTML += `--- 已連線 ---<br>`;
+        };
+        const myMsg = event => {
+            info.innerHTML += `接收到: ${event.data}<br>`;
+        };
+        const myClose = event => {
+            info.innerHTML += `=== 斷線 ===<br>`;
+        };
+
+        document.addEventListener('click', event => {
+            switch (event.target.id) {
+                case 'connectBtn':
+                    //判斷創建連線了嗎 有的話就跳出
+                    if (socket && socket.readyState === WebSocket.OPEN)
+                        return;
+                    //沒有就創建連線
+                    // socket = new WebSocket('ws://echo.websocket.org');
+                    socket = new WebSocket('ws://localhost:3300');
+                    //然後綁定事件
+                    socket.addEventListener('open', myOpen);
+                    socket.addEventListener('message', myMsg);
+                    socket.addEventListener('close', myClose);
+                    break;
+                case 'disconnectBtn':
+                    //判斷有連線而且有這個方法socket.close 的話 就斷線
+                    if (socket && socket.close) socket.close();
+                    break;
+                case 'sendBtn':
+                    if (socket && socket.send) socket.send(myInput.value);
+                    break;
+            }
+        });
+
+    </script>
+</body>
+
+</html>

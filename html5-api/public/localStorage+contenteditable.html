@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="zh">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+
+    <style>
+        #info {
+
+            background-color: #00B7FF;
+
+        }
+
+        #info:focus {
+
+            background-color: #ffc44e;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="info" contenteditable="true">
+
+    </div>
+
+    <script>
+        //localStorage.getItem('KEY')
+        //先從storage 取出質 , 若沒有的話是 null 則設為 '可編輯的文字'
+        let content = localStorage.getItem('div-content') || '可編輯的文字';
+
+
+        info.innerHTML = content;
+
+        info.addEventListener('input', function (event) {
+
+            //並不會儲存內容
+            console.log(info.innerText);
+
+            //localStorage.setItem('KEY','VALUE')
+            //可以存在web storage 裡, 下次造訪在輸出
+            localStorage.setItem('div-content', event.target.innerHTML)
+
+        });
+
+    </script>
+
+</body>
+
+</html>

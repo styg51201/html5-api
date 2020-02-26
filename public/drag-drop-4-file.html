@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #rect {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #b0e9ff;
+        }
+
+        .ball {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #2c47ff;
+            border-radius: 50%;
+            left: 100px;
+            top: 100px;
+        }
+
+        .rect2 {
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            background-color: #ff943b;
+            left: 420px;
+            top: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rect">
+        <div class="ball" draggable="true"></div>
+        <div class="rect2"></div>
+    </div>
+    <div id="info"></div>
+
+    <script>
+        const ball = document.querySelector('.ball');
+        const rect2 = document.querySelector('.rect2');
+
+        const handler = (event) => {
+            console.log(event.type, event.target);
+        };
+
+        rect2.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        rect2.addEventListener('drop', event => {
+            event.preventDefault();
+            info.innerHTML = '';
+            console.log(event.type, event.target);
+
+            if (event.dataTransfer.files && event.dataTransfer.files.length) {
+                for (let i = 0; i < event.dataTransfer.files.length; i++) {
+                    info.innerHTML += `<p> ${event.dataTransfer.files[i].name} </p>`;
+                }
+            }
+        });
+
+
+    </script>
+
+</body>
+
+</html>

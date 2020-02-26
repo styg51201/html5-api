@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="myCanvas"></canvas>
+
+    <script>
+        const myCanvas = document.querySelector('#myCanvas');
+        const ctx = myCanvas.getContext('2d');
+        let x, y, r, c;
+        const balls = [];
+
+        const getRandomColor = () => {
+            let n = Math.floor(16777216 * Math.random());
+            n = n.toString(16);
+            return '#' + '000000'.slice(n.length) + n;
+        };
+
+        const drawCircle = (ctx, cx = 0, cy = 0, r = 10, fillColor = 'red') => {
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fillStyle = fillColor;
+            ctx.fill();
+        };
+
+        function drawAllBalls() {
+            balls.forEach((obj) => {
+                drawCircle(ctx, obj.x, obj.y, obj.r, obj.c);
+            });
+        }
+
+        function modifyAllBalls() {
+            balls.forEach((obj) => {
+                obj.y -= 5 + Math.floor(Math.random() * 4);
+                obj.x += Math.floor(Math.random() * 60) - 30;
+            });
+        }
+
+        for (let i = 0; i < 100; i++) {
+            x = Math.floor(Math.random() * myCanvas.width);
+            y = Math.floor(Math.random() * myCanvas.height);
+            r = 6 + Math.floor(Math.random() * 15);
+            c = getRandomColor();
+            balls.push({ x, y, r, c });
+        }
+
+        function doRun() {
+            modifyAllBalls();
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+            drawAllBalls();
+            setTimeout(doRun, 100);
+        }
+        doRun();
+
+
+    </script>

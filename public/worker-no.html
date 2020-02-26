@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>沒有使用 worker</title>
+</head>
+
+<body>
+    <input type="text" placeholder="測試輸入欄"><br>
+    <button onclick="start(event)">開始算質數</button>
+    <div id="info"></div>
+    <script>
+        const getPrimeNumbers = (num = 5e7) => {
+            const startTime = new Date().getTime();
+            const pn = [2]; // 存放質數的陣列
+            let i, m, n, isPrime;
+
+            for (n = 3; n <= num; n++) {
+                isPrime = true; // 假設 n 為質數
+                m = Math.floor(Math.sqrt(n)); // n 的平方根
+                for (i = 0; i < pn.length; i++) {
+                    if (pn[i] > m) break; // 判斷到 n 的平方根 m
+                    if (n % pn[i] === 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    pn.push(n);
+                }
+            }
+            return {
+                primes: pn,
+                length: pn.length,
+                howLong: new Date().getTime() - startTime
+            }
+        };
+
+        const start = event => {
+            event.target.style.display = 'none';
+            let { primes, length, howLong } = getPrimeNumbers();
+            info.innerHTML = `${length} 個, ${howLong} 毫秒`;
+        };
+    </script>
+</body>
+
+</html>

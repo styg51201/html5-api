@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="myCanvas"></canvas>
+
+    <script>
+        const myCanvas = document.querySelector('#myCanvas');
+        const ctx = myCanvas.getContext('2d');
+
+        ctx.shadowOffsetX = 10; // 位移
+        ctx.shadowOffsetY = 10;
+        ctx.shadowColor = 'rgba(0,0,0,.5)';
+        ctx.shadowBlur = 4; // 模糊效果
+
+        ctx.strokeStyle = 'orange';
+        ctx.lineWidth = 10;
+        ctx.strokeRect(50, 50, 100, 100);
+        //(x,y,width,height) 哪個起點 畫出長寬多少的方塊
+
+
+
+        ctx.fillStyle = 'lightblue'
+        ctx.fillRect(250, 250, 100, 100);
+
+
+    </script>
+
+
+
+</body>
+
+</html>

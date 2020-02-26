@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px dashed green;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <br>
+    <input type="color" id="pColor" value="#0000FF">
+    <input type="number" min="1" max="50" step="1" id="pSize" value="5"> -
+    <button onclick="clearCanvas()">清空重置</button> -
+    <button onclick="saveCanvas()">儲存</button>
+    <script>
+        const myCanvas = document.querySelector('#myCanvas'),
+            pColor = document.querySelector('#pColor'),
+            pSize = document.querySelector('#pSize'),
+            ctx = myCanvas.getContext('2d');
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        const mDown = event => {
+            window.addEventListener('mouseup', mUp);
+            myCanvas.addEventListener('mousemove', mMove);
+            ctx.beginPath();
+            ctx.moveTo(event.offsetX, event.offsetY);
+        };
+        const mUp = event => {
+            window.removeEventListener('mouseup', mUp);
+            myCanvas.removeEventListener('mousemove', mMove);
+        };
+        const mMove = event => {
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
+        };
+        myCanvas.addEventListener('mousedown', mDown);
+
+        // 設置畫筆大小顏色
+        const setPen = () => {
+            ctx.strokeStyle = pColor.value;
+            ctx.lineWidth = pSize.value;
+        };
+        pColor.addEventListener('change', setPen);
+        pSize.addEventListener('change', setPen);
+        setPen();
+
+        const clearCanvas = () => {
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        };
+        const saveCanvas = () => {
+            //把畫出來的轉為base64格式
+            //.replace("image/png", "image/octet-stream") => 把png格式轉換成二元碼..
+            //replace('a','b') => 提取其中的a字串取代成b字串
+            const image = myCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            // location.href = image;
+
+            //創建一個a標籤 但是沒有加到dom裡
+            let a = document.createElement('a');
+            //設定屬性是下載 跟下載的檔名
+            a.setAttribute('download', 'draw.png');
+            //設定連結給base64
+            a.setAttribute('href', image);
+            //觸發點擊 然後下載
+            a.click();
+        };
+
+    </script>
+</body>
+
+</html>

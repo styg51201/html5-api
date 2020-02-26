@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* 滿版 */
+        /* video {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- 設為muted 靜音 才可以自動播放 -->
+    <video autoplay muted src="./big-buck-bunny_trailer.webm">
+    </video>
+    <!-- 字幕 -->
+    <video controls preload="auto" src="./big-buck-bunny_trailer.webm">
+        <track kind="subtitles" srclang="中文" src="./bunny-zh.vtt" default>
+        <track kind="subtitles" srclang="English" src="./bunny-en.vtt">
+    </video>
+</body>
+
+</html>

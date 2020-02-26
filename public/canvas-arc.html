@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400" id="myCanvas"></canvas>
+
+    <script>
+        const myCanvas = document.querySelector('#myCanvas');
+        const ctx = myCanvas.getContext('2d');
+
+        ctx.strokeStyle = 'orange';
+        ctx.lineWidth = 10;
+
+        // 扇型 要先移到圓心
+        // ctx.closePath();
+        ctx.moveTo(300, 200);
+
+        ctx.arc(300, 200, 100, 0, Math.PI * 2 / 3);
+        // ctx.moveTo(300, 200);
+        ctx.closePath();
+        ctx.stroke();
+
+    </script>
+
+
+
+</body>
+
+</html>

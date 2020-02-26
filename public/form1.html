@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <script src="javascripts/jquery-3.4.1.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+</head>
+
+<body>
+
+    <form name="form1" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="user">User</label>
+            <input type="text" class="form-control" id="user" name="user" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+
+        <button type="button" class="btn btn-primary submit">Submit</button>
+    </form>
+
+    <script>
+        $('.submit').on('click', function () {
+            fetch('http://localhost:3000/homework', {
+                method: 'POST',
+                body: new FormData(document.form1)
+            })
+                .then(r => r.json())
+                .then(obj => {
+                    location.reload()
+                })
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px dotted darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./images/bunny-poster.png" alt="" id="bunny_img">
+    <br>
+    <button onclick="myDrawImg()">draw image</button>
+    <canvas width="600" height="400" id="myCanvas"></canvas>
+
+    <script>
+        const myCanvas = document.querySelector('#myCanvas');
+        const ctx = myCanvas.getContext('2d');
+
+        function myDrawImg() {
+            // ctx.drawImage(bunny_img, 0, 0); //原圖
+            ctx.drawImage(bunny_img, 0, 0, bunny_img.width / 2, bunny_img.height / 2);
+
+            ctx.strokeStyle = 'red';
+            ctx.fillStyle = 'orange';
+            ctx.lineWidth = 2;
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = 'bold 72px serif';
+            ctx.fillText('Hello Canvas', 300, 100);
+
+            ctx.font = 'bold 72px arial';
+            ctx.strokeText('Hello Canvas', 300, 200);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

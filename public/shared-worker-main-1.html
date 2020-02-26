@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>使用 shared worker</title>
+</head>
+<body>
+<input type="text" placeholder="測試輸入欄"><br>
+<div id="info"></div>
+<script>
+	const worker = new SharedWorker('javascripts/shared-worker-prime-numbers.js');
+
+	worker.port.onmessage = event=>{
+		const data = event.data;
+		const pn = data.primeNumbers[data.primeNumbers.length-1];
+		info.innerHTML = `${data.action} - 質數：${pn}, ${data.runningTime} msec`;
+	};
+
+	worker.port.postMessage('Hello');
+</script>
+</body>
+</html>

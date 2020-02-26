@@ -1,0 +1,132 @@
+<!doctype html>
+
+<html lang="zh">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+
+</head>
+
+<body>
+
+
+
+    <form action="" onsubmit="return false;" autocomplete="on">
+
+        <label for="myName">姓名：</label>
+
+        <input type="text" name="myName" id="myName" required autofocus><br>
+
+
+
+        <label for="myPass">密碼：</label>
+
+        <input type="password" name="myPass" id="myPass" pattern=".{6,}" required><br>
+
+
+
+        <label for="myEmail">電郵：</label>
+
+        <input type="email" name="myEmail" id="myEmail" required><br>
+
+
+
+        <input type="checkbox" name="myCheckbox" id="myCheckbox" required>
+
+        <label for="myCheckbox">同意授權</label><br>
+
+
+
+        <input type="submit" value="送出">
+
+    </form>
+
+    <script>
+
+        let inputs = document.querySelectorAll('input');
+
+        const myValidate = function (event) {
+
+            // console.log(event.target);
+
+            console.log(event.target.validity);
+
+            const t = event.target;
+
+            const v = t.validity;
+
+            let msg = '';
+
+            switch (true) {
+
+                case v.valueMissing:
+
+                    msg = '必填欄位';
+
+                    break;
+
+                case v.typeMismatch:
+
+                    msg = '請填寫正確的類型';
+
+                    break;
+
+                case v.patternMismatch:
+
+                    msg = '請填寫規定的格式';
+
+                    break;
+
+            }
+
+            t.setCustomValidity(msg);
+
+        };
+
+        inputs.forEach(function (inp) {
+
+            inp.addEventListener('blur', myValidate);
+
+        });
+
+
+
+        /*
+    
+        badInput
+    
+        customError
+    
+        patternMismatch
+    
+        rangeOverflow
+    
+        rangeUnderflow
+    
+        stepMismatch
+    
+        tooLong
+    
+        tooShort
+    
+        typeMismatch
+    
+        valid
+    
+        valueMissing
+    
+         */
+
+    </script>
+
+</body>
+
+</html>

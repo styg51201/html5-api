@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="zh">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+
+</head>
+
+<body>
+
+
+
+    <form action="" onsubmit="return false;" autocomplete="on">
+
+        <label for="myName">帳號：</label>
+
+        <input type="text" name="myName" id="myName" required autofocus><br>
+
+
+
+        <label for="myPass">密碼：</label>
+
+        <input type="password" name="myPass" id="myPass" pattern=".{6,}" required><br>
+
+
+
+        <label for="myPass2">密碼確認：</label>
+
+        <input type="password" name="myPass2" id="myPass2"><br>
+
+        <label for="">：</label>
+        <input type="password" name="myPass2"><br>
+
+
+        <input type="submit" value="註冊">
+
+    </form>
+
+    <script>
+
+        const myPass = document.querySelector('#myPass');
+
+        const myPass2 = document.querySelector('#myPass2');
+
+
+        //blur => input 失焦的時候觸發
+        myPass2.addEventListener('blur', function (event) {
+
+            console.log(event);
+
+            if (myPass.value !== myPass2.value) {
+
+                console.log('11')
+
+                //只要有設定，送出前就會顯示
+                //只有送出才會提示 所以失焦時並不會跑出來
+                myPass2.setCustomValidity('密碼確認欄必須和密碼欄相同內容');
+
+            } else {
+
+                myPass2.setCustomValidity(''); // 取消
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <audio controls src="./196381__minitauross__panflute-loop.mp3" autoplay="autoplay">
+    </audio>
+    <br>
+    <button onclick="loadAudio()">load</button>
+    <br>
+    <button onclick="playAudio()">play or pause</button>
+
+    <script>
+        const au = new Audio();
+
+        const handler = (event) => {
+            console.log(`
+                ${event.type}
+                duration: ${au.duration}
+                currentTime: ${au.currentTime}
+                au.paused: ${au.paused}
+            `);
+
+        };
+
+        au.addEventListener('loadedmetadata', handler);
+        au.addEventListener('timeupdate', handler);
+        au.addEventListener('ended', handler);
+
+        function loadAudio() {
+            au.src = "./196381__minitauross__panflute-loop.mp3";
+
+        }
+
+        function playAudio() {
+            au.paused ? au.play() : au.pause()
+        }
+
+
+    </script>
+</body>
+
+</html>
